@@ -11,6 +11,16 @@ export default new Router({
       component: require('@/components/MainForm').default
     },
     {
+      path: '/edit',
+      name: 'edit-form',
+      component: require('@/components/EditForm').default
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: require('@/components/About').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

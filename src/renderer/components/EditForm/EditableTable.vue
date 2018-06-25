@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EditableTableEdit></EditableTableEdit>
+    <EditableTableEdit :editObject="editObject" :visible="editVisible" formLabelWidth="100px" @editclosing="setEditVisible"></EditableTableEdit>
     <el-table :data="tableData" border style="width: 100%" stripe max-height="280">
       <el-table-column v-for="(value,key) in tableObject" :key="key" :prop="key" :label="key"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
@@ -49,12 +49,12 @@ export default {
     },
     addClick () {
       let newObj = {}
-      Object.keys(this.tableObject).forEach(function(key){
+      Object.keys(this.tableObject).forEach(function (key) {
         newObj[key] = ''
       })
       this.tableData.push(newObj)
     },
-    setEditVisible(){
+    setEditVisible () {
       this.editVisible = false
     }
   },
@@ -66,7 +66,7 @@ export default {
         this.tableObject = {}
       } else {
         let that = this
-        Object.keys(this.tableData[0]).forEach(function(key){
+        Object.keys(this.tableData[0]).forEach(function (key) {
           that.tableObject[key] = ''
         })
       }

@@ -15,8 +15,8 @@
           <el-button type="success" @click="runSpider">Run</el-button>
         </el-row>
         <el-row type="flex" align="middle" justify="center">
-          <el-button round size="mini" type="info">Mod</el-button>
-          <el-button round size="mini" type="danger">Del</el-button>
+          <el-button round size="mini" type="info" @click="editSpider">Mod</el-button>
+          <el-button round size="mini" type="danger" @click="removeSpider">Del</el-button>
         </el-row>
       </el-col>
     </el-row>
@@ -50,6 +50,11 @@ export default {
       socket.send(JSON.stringify(setmessage))
       let getmessage = {Head: 'GetSpiderList', Body: []}
       socket.send(JSON.stringify(getmessage))
+    },
+    editSpider () {
+      console.log(this.spider)
+      this.$store.commit('setSpiderToEdit', this.spider)
+      this.$router.push({path: '/edit'})
     }
   }
 }

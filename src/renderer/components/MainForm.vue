@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-button icon="el-icon-plus">Add</el-button>
+      <el-button icon="el-icon-plus" @click="addNewSpider">Add</el-button>
       <el-button icon="el-icon-refresh" @click="refresh">Refresh</el-button>
     </div>
     <div>
@@ -31,6 +31,9 @@ export default {
   methods: {
     refresh () {
       this.$store.dispatch('initSocket')
+    },
+    addNewSpider: function () {
+      this.$router.push({path: '/edit'})
     }
   }
 }
