@@ -82,6 +82,9 @@ const actions = {
       let message = {Head: 'GetSpiderList', Body: []}
       context.state.socket.send(JSON.stringify(message))
     }
+    context.state.socket.onclose = function () {
+      context.commit('setSocket', null)
+    }
   }
 }
 

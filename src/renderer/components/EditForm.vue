@@ -1,146 +1,146 @@
 <template>
-  <el-form :model="spiderToEdit" :rules="spiderValidRule" ref="editformRef" status-icon label-position="left" label-width="100px">
-    <el-form-item label="Type" prop="type">
+  <el-form :model="spiderToEdit" :rules="spiderValidRule" ref="editformRef" status-icon label-position="left" label-width="130px" size="mini">
+    <el-form-item label="Type" prop="Type">
       <el-select placeholder="请选择" v-model="spiderToEdit.Type">
         <el-option v-for="item in typeEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="HttpRequest" prop="httpRequest">
+    <el-form-item label="HttpRequest" prop="HttpRequest">
       <el-select placeholder="请选择" v-model="spiderToEdit.HttpRequest">
         <el-option v-for="item in httpRequestEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="DataHttp" prop="dataHttp">
+    <el-form-item label="DataHttp" prop="DataHttp">
       <el-select placeholder="请选择" v-model="spiderToEdit.DataHttp">
         <el-option v-for="item in dataHttpEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="DataType" prop="dataType">
+    <el-form-item label="DataType" prop="DataType">
       <el-select placeholder="请选择" v-model="spiderToEdit.DataType">
         <el-option v-for="item in dataTypeEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="DataAddress" prop="dataAddress">
+    <el-form-item label="DataAddress" prop="DataAddress">
       <el-select placeholder="请选择" v-model="spiderToEdit.DataAddress">
         <el-option v-for="item in dataAddressEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="DataBase" prop="dataBase">
+    <el-form-item label="DataBase" prop="DataBase">
       <el-select placeholder="请选择" v-model="spiderToEdit.DataBase">
         <el-option v-for="item in dataBaseEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="Repeat" prop="repeat">
+    <el-form-item label="Repeat" prop="Repeat">
       <el-select placeholder="请选择" v-model="spiderToEdit.Repeat">
         <el-option v-for="item in repeatEnum" :key="item" :value="item"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="EntryName" prop="entryName">
+    <el-form-item label="EntryName" prop="EntryName">
       <el-input v-model="spiderToEdit.EntryName"></el-input>
     </el-form-item>
-    <el-form-item label="LoginUrl" prop="loginUrl">
+    <el-form-item label="LoginUrl" prop="LoginUrl">
       <el-input v-model="spiderToEdit.LoginUrl"></el-input>
     </el-form-item>
-    <el-form-item label="UserName" prop="userName">
+    <el-form-item label="UserName" prop="UserName">
       <el-input v-model="spiderToEdit.UserName"></el-input>
     </el-form-item>
-    <el-form-item label="UserNameKey" prop="userNameKey">
+    <el-form-item label="UserNameKey" prop="UserNameKey">
       <el-input v-model="spiderToEdit.UserNameKey"></el-input>
     </el-form-item>
-    <el-form-item label="Pwd" prop="pwd">
+    <el-form-item label="Pwd" prop="Pwd">
       <el-input v-model="spiderToEdit.Pwd"></el-input>
     </el-form-item>
-    <el-form-item label="PwdKey" prop="pwdKey">
+    <el-form-item label="PwdKey" prop="PwdKey">
       <el-input v-model="spiderToEdit.PwdKey"></el-input>
     </el-form-item>
-    <el-form-item label="Identify" prop="identify">
+    <el-form-item label="Identify" prop="Identify">
       <el-input v-model="spiderToEdit.Identify"></el-input>
     </el-form-item>
-    <el-form-item label="IdentifyKey" prop="identifyKey">
+    <el-form-item label="IdentifyKey" prop="IdentifyKey">
       <el-input v-model="spiderToEdit.IdentifyKey"></el-input>
     </el-form-item>
-    <el-form-item label="ParameterSubmit" prop="parameterSubmit">
+    <el-form-item label="ParameterSubmit" prop="ParameterSubmit">
       <el-input v-model="spiderToEdit.ParameterSubmit"></el-input>
     </el-form-item>
-    <el-form-item label="SessionAging" prop="sessionAging">
+    <el-form-item label="SessionAging" prop="SessionAging">
       <el-input v-model="spiderToEdit.SessionAging"></el-input>
     </el-form-item>
-    <el-form-item label="FirstUrl" prop="firstUrl">
+    <el-form-item label="FirstUrl" prop="FirstUrl">
       <el-input v-model="spiderToEdit.FirstUrl"></el-input>
     </el-form-item>
-    <el-form-item label="FirstUrlParameters" prop="firstUrlParameters">
+    <el-form-item label="FirstUrlParameters" prop="FirstUrlParameters">
       <EditableTable :tableData="spiderToEdit.FirstUrlParameters" :rowModel="urlParameter"></EditableTable>
     </el-form-item>
-    <el-form-item label="SecondUrl" prop="secondUrl">
+    <el-form-item label="SecondUrl" prop="SecondUrl">
       <el-input v-model="spiderToEdit.SecondUrl"></el-input>
     </el-form-item>
-    <el-form-item label="SecondUrlParameters" prop="secondUrlParameters">
+    <el-form-item label="SecondUrlParameters" prop="SecondUrlParameters">
       <EditableTable :tableData="spiderToEdit.SecondUrlParameters" :rowModel="urlParameter"></EditableTable>
     </el-form-item>
-    <el-form-item label="HtmlDataRequests" prop="htmlDataRequests">
+    <el-form-item label="HtmlDataRequests" prop="HtmlDataRequests">
       <EditableTable :tableData="spiderToEdit.HtmlDataRequests" :rowModel="htmlDataRequest"></EditableTable>
     </el-form-item>
-    <el-form-item label="JsonUrl" prop="jsonUrl">
+    <el-form-item label="JsonUrl" prop="JsonUrl">
       <el-input v-model="spiderToEdit.JsonUrl"></el-input>
     </el-form-item>
-    <el-form-item label="JsonParameters" prop="jsonParameters">
+    <el-form-item label="JsonParameters" prop="JsonParameters">
       <EditableTable :tableData="spiderToEdit.JsonParameters" :rowModel="jsonParameter"></EditableTable>
     </el-form-item>
-    <el-form-item label="JsonDownLoad" prop="jsonDownLoad">
+    <el-form-item label="JsonDownLoad" prop="JsonDownLoad">
       <el-input v-model="spiderToEdit.JsonDownLoad"></el-input>
     </el-form-item>
-    <el-form-item label="JsonObject" prop="jsonObject">
+    <el-form-item label="JsonObject" prop="JsonObject">
       <el-input v-model="spiderToEdit.JsonObject"></el-input>
     </el-form-item>
-    <el-form-item label="JsonField" prop="jsonField">
+    <el-form-item label="JsonField" prop="JsonField">
       <el-input v-model="spiderToEdit.JsonField"></el-input>
     </el-form-item>
-    <el-form-item label="JsonSign" prop="jsonSign">
+    <el-form-item label="JsonSign" prop="JsonSign">
       <el-input v-model="spiderToEdit.JsonSign"></el-input>
     </el-form-item>
-    <el-form-item label="EntryType" prop="entryType">
+    <el-form-item label="EntryType" prop="EntryType">
       <el-input v-model="spiderToEdit.EntryType"></el-input>
     </el-form-item>
-    <el-form-item label="Address" prop="address">
+    <el-form-item label="Address" prop="Address">
       <el-input v-model="spiderToEdit.Address"></el-input>
     </el-form-item>
-    <el-form-item label="AddressParameters" prop="addressParameters">
+    <el-form-item label="AddressParameters" prop="AddressParameters">
       <EditableTable :tableData="spiderToEdit.AddressParameters" :rowModel="addressParameter"></EditableTable>
     </el-form-item>
-    <el-form-item label="DataRepeat" prop="dataRepeat">
+    <el-form-item label="DataRepeat" prop="DataRepeat">
       <el-input v-model="spiderToEdit.DataRepeat"></el-input>
     </el-form-item>
-    <el-form-item label="InsertSQL" prop="insertSQL">
+    <el-form-item label="InsertSQL" prop="InsertSQL">
       <el-input v-model="spiderToEdit.InsertSQL"></el-input>
     </el-form-item>
-    <el-form-item label="ErgodicData" prop="ergodicData">
+    <el-form-item label="ErgodicData" prop="ErgodicData">
       <el-switch v-model="spiderToEdit.ErgodicData"></el-switch>
     </el-form-item>
-    <el-form-item label="RepeatData" prop="repeatData">
+    <el-form-item label="RepeatData" prop="RepeatData">
       <el-switch v-model="spiderToEdit.RepeatData"></el-switch>
     </el-form-item>
-    <el-form-item label="IsLocal" prop="isLocal">
+    <el-form-item label="IsLocal" prop="IsLocal">
       <el-switch v-model="spiderToEdit.IsLocal"></el-switch>
     </el-form-item>
-    <el-form-item label="IsFtp" prop="isFtp">
+    <el-form-item label="IsFtp" prop="IsFtp">
       <el-switch v-model="spiderToEdit.IsFtp"></el-switch>
     </el-form-item>
-    <el-form-item label="IsDB" prop="isDB">
+    <el-form-item label="IsDB" prop="IsDB">
       <el-switch v-model="spiderToEdit.IsDB"></el-switch>
     </el-form-item>
-    <el-form-item label="LocalStr" prop="localStr">
+    <el-form-item label="LocalStr" prop="LocalStr">
       <el-input v-model="spiderToEdit.LocalStr"></el-input>
     </el-form-item>
-    <el-form-item label="FtpStr" prop="ftpStr">
+    <el-form-item label="FtpStr" prop="FtpStr">
       <el-input v-model="spiderToEdit.FtpStr"></el-input>
     </el-form-item>
-    <el-form-item label="DBStr" prop="dBStr">
+    <el-form-item label="DBStr" prop="DBStr">
       <el-input v-model="spiderToEdit.DBStr"></el-input>
     </el-form-item>
-    <el-form-item label="Active" prop="active">
+    <el-form-item label="Active" prop="Active">
       <el-switch v-model="spiderToEdit.Active"></el-switch>
     </el-form-item>
-    <el-form-item label="Time" prop="time">
+    <el-form-item label="Time" prop="Time">
       <el-date-picker type="datetime" v-model="spiderToEdit.Time" placeholder="选择日期时间" value-format="yyyy-MM-ddTHH:mm"></el-date-picker>
     </el-form-item>
     <el-form-item>
@@ -280,13 +280,13 @@
     computed: {
       isEqual () {
         if (this.$store.state.SpiderList.spiderToEdit === null) {
-          return this.spiderToEdit.entryName === ''
+          return this.spiderToEdit.EntryName === ''
         } else {
-          return this.spiderToEdit.entryName === this.$store.state.SpiderList.spiderToEdit.entryName
+          return this.spiderToEdit.EntryName === this.$store.state.SpiderList.spiderToEdit.EntryName
         }
       },
       isContain () {
-        return this.$store.state.SpiderList.filelist.includes(this.spiderToEdit.entryName.toLowerCase())
+        return this.$store.state.SpiderList.filelist.includes(this.spiderToEdit.EntryName.toLowerCase())
       }
     },
     methods: {
