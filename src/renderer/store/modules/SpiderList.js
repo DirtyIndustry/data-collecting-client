@@ -2,7 +2,8 @@ var state = {
   spiders: [],
   spiderToEdit: null,
   filelist: [],
-  socket: null
+  socket: null,
+  messageIn: null // 监听该值处理socket传入的信息
 }
 const mutations = {
   clearFileList () {
@@ -40,6 +41,9 @@ const mutations = {
   },
   setSocket (state, msg) {
     state.socket = msg
+  },
+  setMessageIn (state, msg) {
+    state.messageIn = msg
   }
 }
 
@@ -76,6 +80,8 @@ const actions = {
         for (let item of list) {
           context.dispatch('addSpider', item)
         }
+      } else {
+        context.commit('setMessageIn', obj)
       }
     }
     context.state.socket.onopen = function () {
