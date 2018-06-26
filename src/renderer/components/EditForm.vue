@@ -293,6 +293,9 @@
       submitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            if (this.$store.state.SpiderList.socket === null) {
+              this.$store.dispatch('initSocket')
+            }
             let socket = this.$store.state.SpiderList.socket
             if (!this.addingNew) {
               let removemessage = { Head: 'RemoveSpider', Body: [JSON.stringify(this.$store.state.SpiderList.spiderToEdit)] }

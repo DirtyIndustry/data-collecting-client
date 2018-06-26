@@ -45,6 +45,9 @@
     },
     methods: {
       switchActive (value) {
+        if (this.$store.state.SpiderList.socket === null) {
+          this.$store.dispatch('initSocket')
+        }
         let socket = this.$store.state.SpiderList.socket
         let setmessage = { Head: 'SetActive', Body: [this.spider.EntryName, value] }
         socket.send(JSON.stringify(setmessage))
@@ -52,6 +55,9 @@
         socket.send(JSON.stringify(getmessage))
       },
       runSpider () {
+        if (this.$store.state.SpiderList.socket === null) {
+          this.$store.dispatch('initSocket')
+        }
         let socket = this.$store.state.SpiderList.socket
         let message = { Head: 'Run', Body: [JSON.stringify(this.spider)] }
         socket.send(JSON.stringify(message))
@@ -59,6 +65,9 @@
       },
       removeSpider () {
         this.deleteConfirmVisible = false
+        if (this.$store.state.SpiderList.socket === null) {
+          this.$store.dispatch('initSocket')
+        }
         let socket = this.$store.state.SpiderList.socket
         let setmessage = { Head: 'RemoveSpider', Body: [JSON.stringify(this.spider)] }
         socket.send(JSON.stringify(setmessage))
