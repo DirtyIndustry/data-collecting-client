@@ -295,7 +295,7 @@
           if (valid) {
             let socket = this.$store.state.SpiderList.socket
             if (!this.addingNew) {
-              let removemessage = { Head: 'RemoveSpider', Body: [this.$store.state.SpiderList.spiderToEdit] }
+              let removemessage = { Head: 'RemoveSpider', Body: [JSON.stringify(this.$store.state.SpiderList.spiderToEdit)] }
               socket.send(JSON.stringify(removemessage))
             }
             let addmessage = { Head: 'AddSpider', Body: [JSON.stringify(this.spiderToEdit)] }

@@ -41,12 +41,12 @@ export default {
     },
     runSpider () {
       let socket = this.$store.state.SpiderList.socket
-      let message = {Head: 'Run', Body: [this.spider]}
+      let message = {Head: 'Run', Body: [JSON.stringify(this.spider)]}
       socket.send(JSON.stringify(message))
     },
     removeSpider () {
       let socket = this.$store.state.SpiderList.socket
-      let setmessage = {Head: 'RemoveSpider', Body: [this.spider]}
+      let setmessage = {Head: 'RemoveSpider', Body: [JSON.stringify(this.spider)]}
       socket.send(JSON.stringify(setmessage))
       let getmessage = {Head: 'GetSpiderList', Body: []}
       socket.send(JSON.stringify(getmessage))
