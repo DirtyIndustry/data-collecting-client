@@ -73,7 +73,13 @@ const actions = {
     }
     context.state.socket.onmessage = function (event) {
       let data = event.data
-      let obj = JSON.parse(data)
+      let obj
+      try {
+        obj = JSON.parse(data)
+      } catch (error) {
+        console.log(data)
+        return
+      }
       if (obj.Head === 'GetSpiderList') {
         context.dispatch('clearLists')
         let list = JSON.parse(obj.Body)

@@ -17,13 +17,39 @@
       Header,
       Footer
     },
-    computed: {
-      socket: {
-        get () {
-          return this.$store.state.SpiderList.socket
-        },
-        set (value) {
-          this.$store.commit('setSocket', value)
+    watch: {
+      '$store.state.SpiderList.messageIn': {
+        handler: function (newer, older) {
+          if (newer !== null) {
+            if (newer.Head === 'TaskStart') {
+              if (newer.Body[1] === 'True') {
+                this.$notify.info({
+                  title: '任务开始',
+                  message: '任务' + newer.Body[0] + '开始执行。'
+                })
+              } else if (newer.Body[1] === 'False') {
+                this.$notify({
+                  title: '任务跳过',
+                  message: '任务' + newer.Body[0] + '没有激活，跳过本次执行。',
+                  type: 'warning'
+                })
+              }
+            } else if (newer.Head === 'TaskFinish') {
+              if (newer.Body[1] === 'True') {
+                this.$notify({
+                  title: '任务完成',
+                  message: '任务' + newer.Body[0] + '完成。',
+                  type: 'success'
+                })
+              } else if (newer.Body[1] === 'False') {
+                this.$notify.error({
+                  title: '任务失败',
+                  message: '任务' + newer.Body[0] + '执行失败。'
+                })
+              }
+            }
+            this.$store.commit('setMessageIn', null)
+          }
         }
       }
     },
