@@ -303,8 +303,6 @@
             }
             let addmessage = { Head: 'AddSpider', Body: [JSON.stringify(this.spiderToEdit)] }
             socket.send(JSON.stringify(addmessage))
-            let getmessage = { Head: 'GetSpiderList', Body: [] }
-            socket.send(JSON.stringify(getmessage))
             this.$router.push({ path: '/' })
           } else {
             return false

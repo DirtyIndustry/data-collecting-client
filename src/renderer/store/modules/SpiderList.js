@@ -1,7 +1,10 @@
+import Vue from 'vue'
+
 var state = {
   spiders: [],
   spiderToEdit: null,
   filelist: [],
+  loglist: [],
   socket: null,
   messageIn: null // 监听该值处理socket传入的信息
 }
@@ -12,6 +15,9 @@ const mutations = {
   clearSpiderList () {
     state.spiders.splice(0, state.spiders.length)
   },
+  clearLogList () {
+    state.loglist.splice(0, state.loglist.length)
+  },
   spiderListAdd (state, spider) {
     state.spiders.push(spider)
     function SortByName (x, y) {
@@ -21,6 +27,9 @@ const mutations = {
   },
   fileListAdd (state, spider) {
     state.filelist.push(spider.EntryName.toLowerCase())
+  },
+  logListAdd (state, log) {
+    state.loglist.push(log)
   },
   spiderListRemove (state, spider) {
     state.spiders = state.spiders.filter(item => {
@@ -44,6 +53,19 @@ const mutations = {
   },
   setMessageIn (state, msg) {
     state.messageIn = msg
+  },
+  toggleSelect (state, spidername) {
+    let s = state.spiders.find(spider => {
+      return spider.EntryName === spidername
+    })
+    if (s.hasOwnProperty('isSelected') === false) {
+      // s = Object.assign(s, {isSelected: true})
+      Vue.set(s, 'isSelected', true)
+    } else if (s.isSelected === true) {
+      s.isSelected = false
+    } else if (s.isSelected === false) {
+      s.isSelected = true
+    }
   }
 }
 
@@ -86,12 +108,23 @@ const actions = {
         for (let item of list) {
           context.dispatch('addSpider', item)
         }
+      } else if (obj.Head === 'GetLogs') {
+        context.commit('clearLogList')
+        let list = JSON.parse(obj.Body)
+        for (let item of list) {
+          context.commit('logListAdd', item)
+        }
+      } else if (obj.Head === 'AddLog') {
+        let log = JSON.parse(obj.Body)
+        context.commit('logListAdd', log)
       } else {
         context.commit('setMessageIn', obj)
       }
     }
     context.state.socket.onopen = function () {
       let message = {Head: 'GetSpiderList', Body: []}
+      context.state.socket.send(JSON.stringify(message))
+      message = {Head: 'GetLogs', Body: []}
       context.state.socket.send(JSON.stringify(message))
     }
     context.state.socket.onclose = function () {

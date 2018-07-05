@@ -47,6 +47,8 @@
                   message: '任务' + newer.Body[0] + '执行失败。'
                 })
               }
+            } else {
+              console.log(newer)
             }
             this.$store.commit('setMessageIn', null)
           }
@@ -61,4 +63,11 @@
 
 <style>
   /* CSS */
+  :not(input):not(textarea),
+  :not(input):not(textarea)::after,
+  :not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+  }
 </style>
