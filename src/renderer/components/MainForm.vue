@@ -1,24 +1,28 @@
 <template>
   <div>
-    <div>
-      <el-button icon="el-icon-plus" @click="addNewSpider">Add</el-button>
-      <el-button icon="el-icon-refresh" @click="refresh">Refresh</el-button>
-      <el-popover placement="top" width="160" v-model="deleteConfirmVisible">
-            <p>确定删除吗？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="deleteConfirmVisible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="massDelete">确定</el-button>
-            </div>
-            <el-button :disabled="!hasSelection" icon="el-icon-delete" type="danger" slot="reference">Delete</el-button>
-          </el-popover>
-      <el-checkbox-button :disabled="!hasSelection" v-model="massActiveValue" @change="massActive">Active</el-checkbox-button>
-      <el-button :disabled="!hasSelection" @click="massRun">Run</el-button>
-      <el-input v-model="searchString" clearable placeholder="搜索采集计划"></el-input>
+    <div class="wrap">
+      <div class="btns">
+        <el-button icon="el-icon-plus" @click="addNewSpider">Add</el-button>
+        <el-button icon="el-icon-refresh" @click="refresh">Refresh</el-button>
+        <el-popover placement="top" width="160" v-model="deleteConfirmVisible">
+          <p>确定删除吗？</p>
+          <div style="text-align: right; margin: 0">
+            <el-button size="mini" type="text" @click="deleteConfirmVisible = false">取消</el-button>
+            <el-button type="primary" size="mini" @click="massDelete">确定</el-button>
+          </div>
+          <el-button :disabled="!hasSelection" icon="el-icon-delete" type="danger" slot="reference">Delete</el-button>
+        </el-popover>
+        <el-checkbox-button :disabled="!hasSelection" v-model="massActiveValue" @change="massActive">Active</el-checkbox-button>
+        <el-button :disabled="!hasSelection" @click="massRun">Run</el-button>
+      </div>
+      <div class="search">
+        <el-input v-model="searchString" clearable placeholder="搜索采集计划"></el-input>
+      </div>
     </div>
     <div>
       <ul v-if="mainList.length">
-        <MainListItem v-for="item in mainList" :key="item.name" :spider="item" @selectItem="selectItem" 
-        @ctrlSelectItem="ctrlSelectItem" @shiftSelectItem="shiftSelectItem">
+        <MainListItem v-for="item in mainList" :key="item.name" :spider="item" @selectItem="selectItem" @ctrlSelectItem="ctrlSelectItem"
+          @shiftSelectItem="shiftSelectItem">
         </MainListItem>
       </ul>
       <p v-else>
@@ -171,3 +175,9 @@ export default {
   }
 }
 </script>
+<style>
+  .wrap{
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

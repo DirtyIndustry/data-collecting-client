@@ -53,6 +53,13 @@
             this.$store.commit('setMessageIn', null)
           }
         }
+      },
+      '$store.state.SpiderList.socket': {
+        handler: function (newer, older) {
+          if (newer === null) {
+            this.$store.commit('initSocket')
+          }
+        }
       }
     },
     created () {

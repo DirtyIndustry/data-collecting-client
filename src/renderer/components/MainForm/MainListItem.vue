@@ -4,7 +4,7 @@
     <div class="outerdiv">
       <div class="headdiv">
         <div class="checkdiv">
-          <el-switch v-model="isActive"></el-switch>
+          <el-switch v-model="isActive" active-text="启用" inactive-text="禁用"></el-switch>
         </div>
         <div class="infos">
           <p>{{spider.EntryName}}</p>
@@ -160,7 +160,7 @@
   }
 
   .checkdiv {
-    width: 50px;
+    width: 150px;
   }
 
   .infos p {
