@@ -4,7 +4,8 @@
     <div class="outerdiv">
       <div class="headdiv">
         <div class="checkdiv">
-          <el-switch v-model="isActive" active-text="启用" inactive-text="禁用"></el-switch>
+          <el-switch v-model="isActive"></el-switch>
+          <div>{{isActiveDesc}}</div>
         </div>
         <div class="infos">
           <p>{{spider.EntryName}}</p>
@@ -90,6 +91,13 @@
           let setmessage = { Head: 'SetActive', Body: [this.spider.EntryName, value] }
           socket.send(JSON.stringify(setmessage))
         }
+      },
+      isActiveDesc: function () {
+        if (this.isActive) {
+          return '启用'
+        } else {
+          return '禁用'
+        }
       }
     },
     methods: {
@@ -160,7 +168,7 @@
   }
 
   .checkdiv {
-    width: 150px;
+    width: 50px;
   }
 
   .infos p {

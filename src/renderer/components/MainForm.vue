@@ -14,8 +14,13 @@
         </el-popover>
         <el-checkbox-button :disabled="!hasSelection" v-model="massActiveValue" @change="massActive">Active</el-checkbox-button>
         <el-button :disabled="!hasSelection" @click="massRun">Run</el-button>
+        <el-button @click="importSpiders">导入</el-button>
+        <el-button @click="exportSpiders">导出</el-button>
       </div>
       <div class="search">
+        <el-select v-model="filterValue">
+          <el-option v-for="item in filterOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        </el-select>
         <el-input v-model="searchString" clearable placeholder="搜索采集计划"></el-input>
       </div>
     </div>
@@ -40,12 +45,25 @@ export default {
     MainListItem
   },
   computed: {
+    filteredList () {
+      if (this.filterValue === 'All') {
+        return this.$store.state.SpiderList.spiders
+      } else if (this.filterValue === 'Active') {
+        return this.$store.state.SpiderList.spiders.filter(function (item) {
+          return item.Active === true
+        })
+      } else if (this.filterValue === 'Inactive') {
+        return this.$store.state.SpiderList.spiders.filter(function (item) {
+          return item.Active === false
+        })
+      }
+    },
     mainList () {
       if (this.searchString === '') {
-        return this.$store.state.SpiderList.spiders
+        return this.filteredList
       } else {
         let that = this
-        return this.$store.state.SpiderList.spiders.filter(function (item) {
+        return this.filteredList.filter(function (item) {
           return item.EntryName.includes(that.searchString)
         })
       }
@@ -57,7 +75,13 @@ export default {
       hasSelection: false,
       lastSelected: null,
       massActiveValue: true,
-      deleteConfirmVisible: false
+      deleteConfirmVisible: false,
+      filterValue: 'All',
+      filterOptions: [
+        {value: 'All', label: '全部'},
+        {value: 'Active', label: '启用'},
+        {value: 'Inactive', label: '禁用'}
+      ]
     }
   },
   methods: {
@@ -171,6 +195,31 @@ export default {
           }
         }
       })
+    },
+    importSpiders () {
+      // const {dialog} = require('electron').remote
+      // console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
+      let result = this.$electron.remote.dialog.showOpenDialog({
+        properties: ['openFile', 'multiSelections'],
+        filters: [{name: 'XML File', extensions: ['xml']}]
+      })
+      let socket = this.$store.state.SpiderList.socket
+      let xmlReader = require('../utils/xmlReader')
+      for (let i = 0; i < result.length; i++) {
+        let spider = xmlReader.readXml(result[i])
+        console.log(spider)
+        if (!this.$store.state.SpiderList.filelist.includes(spider.EntryName)) {
+          let addmessage = { Head: 'AddSpider', Body: [JSON.stringify(spider)] }
+          socket.send(JSON.stringify(addmessage))
+        }
+      }
+    },
+    exportSpiders () {
+      console.log('export')
+      let result = this.$electron.remote.dialog.showOpenDialog({
+        properties: ['openDirectory']
+      })
+      console.log(result)
     }
   }
 }

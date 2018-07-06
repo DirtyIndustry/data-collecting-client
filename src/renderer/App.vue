@@ -57,7 +57,7 @@
       '$store.state.SpiderList.socket': {
         handler: function (newer, older) {
           if (newer === null) {
-            this.$store.commit('initSocket')
+            this.$store.dispatch('initSocket')
           }
         }
       }
