@@ -199,27 +199,52 @@ export default {
     importSpiders () {
       // const {dialog} = require('electron').remote
       // console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
-      let result = this.$electron.remote.dialog.showOpenDialog({
+      let filepaths = this.$electron.remote.dialog.showOpenDialog({
         properties: ['openFile', 'multiSelections'],
-        filters: [{name: 'XML File', extensions: ['xml']}]
+        filters: [{name: 'JSON File', extensions: ['json']}]
       })
+      if (!filepaths) {
+        return
+      }
       let socket = this.$store.state.SpiderList.socket
-      let xmlReader = require('../utils/xmlReader')
-      for (let i = 0; i < result.length; i++) {
-        let spider = xmlReader.readXml(result[i])
-        console.log(spider)
-        if (!this.$store.state.SpiderList.filelist.includes(spider.EntryName)) {
+      let fs = require('fs')
+      for (let i = 0; i < filepaths.length; i++) {
+        let content = fs.readFileSync(filepaths[i]).toString()
+        let spider = JSON.parse(content)
+        if (!this.$store.state.SpiderList.filelist.includes(spider.EntryName) & spider.EntryName !== '') {
           let addmessage = { Head: 'AddSpider', Body: [JSON.stringify(spider)] }
           socket.send(JSON.stringify(addmessage))
         }
       }
     },
     exportSpiders () {
-      console.log('export')
-      let result = this.$electron.remote.dialog.showOpenDialog({
+      let folderpath = this.$electron.remote.dialog.showOpenDialog({
         properties: ['openDirectory']
-      })
-      console.log(result)
+      })[0]
+      if (!folderpath) {
+        return
+      }
+      let path = require('path')
+      let fs = require('fs')
+      for (let i = 0; i < this.mainList.length; i++) {
+        if (this.hasSelection === true) {
+          if (this.mainList[i].isSelected === true) {
+            let filepath = path.join(folderpath, this.mainList[i].EntryName + '.json')
+            fs.writeFile(filepath, JSON.stringify(this.mainList[i]), err => {
+              if (err) {
+                return console.log(err)
+              }
+            })
+          }
+        } else {
+          let filepath = path.join(folderpath, this.mainList[i].EntryName + '.json')
+          fs.writeFile(filepath, JSON.stringify(this.mainList[i]), err => {
+            if (err) {
+              return console.log(err)
+            }
+          })
+        }
+      }
     }
   }
 }
