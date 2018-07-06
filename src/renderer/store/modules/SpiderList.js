@@ -86,7 +86,17 @@ const actions = {
     if (context.state.socket !== null) {
       context.state.socket.close()
     }
-    context.commit('setSocket', new WebSocket('ws://localhost:7181'))
+    // configuation file
+    let path = require('path')
+    let fs = require('fs')
+    let filepath = path.join(__static, 'configuration.json')
+    let content = fs.readFileSync(filepath).toString()
+    if (!content) {
+      return
+    }
+    let configuration = JSON.parse(content)
+    // context.commit('setSocket', new WebSocket('ws://localhost:7181'))
+    context.commit('setSocket', new WebSocket('ws://' + configuration.server))
     context.state.socket.onerror = function (error) {
       console.log(error)
       if (context.state.socket.readyState === 3) {
