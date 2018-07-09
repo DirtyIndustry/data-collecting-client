@@ -123,7 +123,7 @@
         // this.stopBubble(event)
       },
       editSpider (event) {
-        console.log(this.spider)
+        // console.log(this.spider)
         this.$store.commit('setSpiderToEdit', this.spider)
         this.$router.push({ path: '/edit' })
         // this.stopBubble(event)

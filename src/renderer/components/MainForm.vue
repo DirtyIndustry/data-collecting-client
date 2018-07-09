@@ -141,7 +141,7 @@ export default {
       let that = this
       this.mainList.forEach(function (item) {
         if (item.isSelected) {
-          console.log(item.EntryName)
+          // console.log(item.EntryName)
           if (that.$store.state.SpiderList.socket === null) {
             that.$store.dispatch('initSocket')
           }
@@ -157,7 +157,7 @@ export default {
       let that = this
       this.mainList.forEach(function (item) {
         if (item.isSelected) {
-          console.log(item.EntryName)
+          // console.log(item.EntryName)
           if (that.$store.state.SpiderList.socket === null) {
             that.$store.dispatch('initSocket')
           }
@@ -172,7 +172,7 @@ export default {
       let that = this
       this.mainList.forEach(function (item) {
         if (item.isSelected) {
-          console.log(item.EntryName)
+          // console.log(item.EntryName)
           if (that.$store.state.SpiderList.socket === null) {
             that.$store.dispatch('initSocket')
           }
@@ -218,10 +218,10 @@ export default {
       }
     },
     exportSpiders () {
-      let folderpath = this.$electron.remote.dialog.showOpenDialog({
+      let folderpaths = this.$electron.remote.dialog.showOpenDialog({
         properties: ['openDirectory']
-      })[0]
-      if (!folderpath) {
+      })
+      if (!folderpaths) {
         return
       }
       let path = require('path')
@@ -229,7 +229,7 @@ export default {
       for (let i = 0; i < this.mainList.length; i++) {
         if (this.hasSelection === true) {
           if (this.mainList[i].isSelected === true) {
-            let filepath = path.join(folderpath, this.mainList[i].EntryName + '.json')
+            let filepath = path.join(folderpaths[0], this.mainList[i].EntryName + '.json')
             fs.writeFile(filepath, JSON.stringify(this.mainList[i]), err => {
               if (err) {
                 return console.log(err)
@@ -237,7 +237,7 @@ export default {
             })
           }
         } else {
-          let filepath = path.join(folderpath, this.mainList[i].EntryName + '.json')
+          let filepath = path.join(folderpaths[0], this.mainList[i].EntryName + '.json')
           fs.writeFile(filepath, JSON.stringify(this.mainList[i]), err => {
             if (err) {
               return console.log(err)
