@@ -243,26 +243,26 @@
         dataBaseEnum: ['ORACLE', 'SQLServer'],
         repeatEnum: ['Yearly', 'Monthly', 'Weekly', 'Daily', 'Hourly', 'Never'],
         addressParameter: {
-          parameter: ''
+          Parameter: ''
         },
         jsonParameter: {
-          jsonName: '',
-          jsonValue: ''
+          JsonName: '',
+          JsonValue: ''
         },
         htmlDataRequest: {
-          startChar: '',
-          endChar: '',
-          dataType: '',
-          row: '',
-          column: '',
-          arrayNum: '',
-          spliter: '',
-          dBKey: ''
+          StartChar: '',
+          EndChar: '',
+          DataType: '',
+          Row: '',
+          Column: '',
+          ArrayNum: '',
+          Spliter: '',
+          DBKey: ''
         },
         urlParameter: {
-          parameterChange: '',
-          urlName: '',
-          urlValue: ''
+          ParameterChange: '',
+          UrlName: '',
+          UrlValue: ''
         },
         spiderValidRule: {
           EntryName: [
