@@ -1,9 +1,9 @@
 <template>
   <div>
-    <EditableTableEdit :editObject="editObject" :visible="editVisible" formLabelWidth="100px" @editclosing="setEditVisible"></EditableTableEdit>
+    <EditableTableEdit :editObject="editObject" :visible="editVisible" formLabelWidth="10rem" @editclosing="setEditVisible"></EditableTableEdit>
     <el-table :data="tableData" border style="width: 100%" stripe max-height="280">
-      <el-table-column v-for="(value,key) in tableObject" :key="key" :prop="key" :label="key"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="100">
+      <el-table-column v-for="(value, key) in tableObject" :key="key" :prop="key" :label="key"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="100rem">
         <template slot-scope="scope">
           <el-button size="small" type="text" @click="editClick(scope.row)">编辑</el-button>
           <el-button size="small" type="text" @click="deleteClick(scope.row)">删除</el-button>

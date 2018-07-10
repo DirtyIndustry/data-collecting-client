@@ -6,7 +6,7 @@ var state = {
   filelist: [],
   loglist: [],
   socket: null,
-  messageIn: null // 监听该值处理socket传入的信息
+  messageIn: null
 }
 const mutations = {
   clearFileList () {
@@ -43,7 +43,7 @@ const mutations = {
     let s = state.spiders.find(spider => {
       return spider.EntryName === msg.EntryName
     })
-    s.active = !s.active
+    s.Active = !s.Active
   },
   setSpiderToEdit (state, msg) {
     state.spiderToEdit = msg
@@ -59,7 +59,6 @@ const mutations = {
       return spider.EntryName === spidername
     })
     if (s.hasOwnProperty('isSelected') === false) {
-      // s = Object.assign(s, {isSelected: true})
       Vue.set(s, 'isSelected', true)
     } else if (s.isSelected === true) {
       s.isSelected = false
@@ -86,7 +85,6 @@ const actions = {
     if (context.state.socket !== null) {
       context.state.socket.close()
     }
-    // configuation file
     let path = require('path')
     let fs = require('fs')
     let filepath = path.join(__static, 'configuration.json')
@@ -95,7 +93,6 @@ const actions = {
       return
     }
     let configuration = JSON.parse(content)
-    // context.commit('setSocket', new WebSocket('ws://localhost:7181'))
     context.commit('setSocket', new WebSocket('ws://' + configuration.server))
     context.state.socket.onerror = function (error) {
       console.log(error)
@@ -115,14 +112,14 @@ const actions = {
       if (obj.Head === 'GetSpiderList') {
         context.dispatch('clearLists')
         let list = JSON.parse(obj.Body)
-        for (let item of list) {
-          context.dispatch('addSpider', item)
+        for (let i = 0; i < list.length; i++) {
+          context.dispatch('addSpider', list[i])
         }
       } else if (obj.Head === 'GetLogs') {
         context.commit('clearLogList')
         let list = JSON.parse(obj.Body)
-        for (let item of list) {
-          context.commit('logListAdd', item)
+        for (let i = 0; i < list.length; i++) {
+          context.commit('logListAdd', list[i])
         }
       } else if (obj.Head === 'AddLog') {
         let log = JSON.parse(obj.Body)
