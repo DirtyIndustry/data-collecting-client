@@ -14,7 +14,7 @@ export default {
   name: 'data-collecting-client',
   components: {
     Header,
-    Footer,
+    Footer
   },
   watch: {
     '$store.state.SpiderList.messageIn': {

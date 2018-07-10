@@ -88,9 +88,8 @@ export default {
       this.$router.push({path: '/edit'})
     },
     selectItem (spider) {
-      let that = this
       this.$store.commit('toggleSelect', spider.EntryName)
-      for(let i = 0; i < this.$store.state.SpiderList.spiders.length; i++) {
+      for (let i = 0; i < this.$store.state.SpiderList.spiders.length; i++) {
         if (this.$store.state.SpiderList.spiders[i].EntryName !== spider.EntryName) {
           if (this.$store.state.SpiderList.spiders[i].isSelected === true) {
             this.$store.commit('toggleSelect', this.$store.state.SpiderList.spiders[i].EntryName)
@@ -106,7 +105,6 @@ export default {
       this.lastSelected = spider
     },
     shiftSelectItem (spider) {
-      let that = this
       let min
       let max
       if (spider.EntryName > this.lastSelected.EntryName) {
@@ -116,7 +114,7 @@ export default {
         min = spider.EntryName
         max = this.lastSelected.EntryName
       }
-      let spiderlist =this.$store.state.SpiderList.spiders
+      let spiderlist = this.$store.state.SpiderList.spiders
       for (let i = 0; i < spiderlist.length; i++) {
         if (spiderlist[i].EntryName >= min & spiderlist[i].EntryName <= max) {
           if (spiderlist[i].isSelected !== true) {
@@ -130,18 +128,16 @@ export default {
     },
     massDelete () {
       this.deleteConfirmVisible = false
-      let that = this
       for (let i = 0; i < this.mainList.length; i++) {
         if (this.mainList[i].isSelected === true) {
           let setmessage = {Head: 'RemoveSpider', Body: [JSON.stringify(this.mainList[i])]}
           this.$store.state.SpiderList.socket.send(JSON.stringify(setmessage))
-          this.$message.error('删除' + this.mainList[i].EntryName);
+          this.$message.error('删除' + this.mainList[i].EntryName)
         }
       }
       this.hasSelection = false
     },
     massActive () {
-      let that = this
       for (let i = 0; i < this.mainList.length; i++) {
         if (this.mainList[i].isSelected === true) {
           let setmessage = {Head: 'SetActive', Body: [this.mainList[i].EntryName, this.massActiveValue]}
@@ -151,7 +147,6 @@ export default {
       this.hasSelection = false
     },
     massRun () {
-      let that = this
       for (let i = 0; i < this.mainList.length; i++) {
         if (this.mainList[i].isSelected === true) {
           let message = {Head: 'Run', Body: [JSON.stringify(this.mainList[i])]}
@@ -161,7 +156,6 @@ export default {
       }
     },
     setLocalValues () {
-      let that = this
       this.hasSelection = false
       this.massActiveValue = true
       for (let i = 0; i < this.mainList.length; i++) {

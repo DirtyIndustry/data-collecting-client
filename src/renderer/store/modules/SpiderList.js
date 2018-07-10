@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 var state = {
   spiders: [],
   spiderToEdit: null,
@@ -57,7 +59,6 @@ const mutations = {
       return spider.EntryName === spidername
     })
     if (s.hasOwnProperty('isSelected') === false) {
-      let Vue = require('vue')
       Vue.set(s, 'isSelected', true)
     } else if (s.isSelected === true) {
       s.isSelected = false

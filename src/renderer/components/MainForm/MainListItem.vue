@@ -68,7 +68,7 @@ export default {
         return ''
       } else {
         this.logs.sort(function (x, y) {
-          return ((x.Time === y.Time) ? 0: ((x.Time > y.Time) ? 1 : -1))
+          return ((x.Time === y.Time) ? 0 : ((x.Time > y.Time) ? 1 : -1))
         })
         return this.logs[this.logs.length - 1]
       }
@@ -83,7 +83,7 @@ export default {
       }
     },
     isActiveDesc () {
-      if (this.isActive ===  true) {
+      if (this.isActive === true) {
         return '启用'
       } else {
         return '禁用'
@@ -112,25 +112,25 @@ export default {
 
 <style scoped>
   .card {
-    min-width: 630rem;
-    margin-top: 10rem;
-    padding: 10rem;
-    border-radius: 8rem;
-    border: rgb(200, 200, 200) 1rem solid;
+    min-width: 35rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    border: rgb(200, 200, 200) 0.1rem solid;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
   }
   .logpop {
-    border: rgb(200, 200, 200) 1rem solid;
+    border: rgb(200, 200, 200) 0.1rem solid;
   }
   .headdiv {
     display: flex;
     align-items: center;
   }
   .checkdiv {
-    width: 50rem;
+    width: 5rem;
   }
   .infos p {
     margin: 0;
@@ -140,16 +140,16 @@ export default {
     text-overflow: ellipsis;
   }
   .infos {
-    max-width: 400rem;
+    max-width: 40rem;
   }
   .buttondiv {
-    min-width: 120rem;
+    min-width: 12rem;
   }
   .selected {
-    border: rgb(0, 120, 255) 1rem solid;
-    box-shadow: rgba(20, 30, 40, 0.3) 0 0 10rem;
+    border: rgb(0, 120, 255) 0.1rem solid;
+    box-shadow: rgba(20, 30, 40, 0.3) 0 0 1rem;
   }
   .card:hover {
-    box-shadow: rgba(20, 30, 40, 0.3) 0 0 10rem;
+    box-shadow: rgba(20, 30, 40, 0.3) 0 0 1rem;
   }
 </style>
