@@ -34,5 +34,3 @@ script:
 branches:
   only:
   - master
-after_script:
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/DirtyIndustry/data-collecting-client.git" master:gh-pages

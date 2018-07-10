@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import pkg from '../../package.json'
+import updateChecker from './utils/updateChecker'
 
 /**
  * Set `__static` path to static files in production
@@ -37,7 +38,10 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+  updateChecker()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
