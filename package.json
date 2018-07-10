@@ -1,6 +1,6 @@
 {
   "name": "data-collecting-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Dirty Industry <xiao1_yu3@163.com>",
   "description": "A simple data collecting client.",
   "license": "MIT",
