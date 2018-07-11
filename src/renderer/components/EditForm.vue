@@ -137,6 +137,15 @@
   <el-form-item label="DBStr" prop="DBStr">
     <el-input v-model="spiderToEdit.DBStr"></el-input>
   </el-form-item>
+  <el-form-item label="DictRelationLocals" prop="DictRelationLocals">
+    <EditableTable :tableData="spiderToEdit.DictRelationLocals" :rowModel="dictRelationLocal"></EditableTable>
+  </el-form-item>
+  <el-form-item label="DictRelationFTPs" prop="DictRelationFTPs">
+    <EditableTable :tableData="spiderToEdit.DictRelationFTPs" :rowModel="dictRelationFTP"></EditableTable>
+  </el-form-item>
+  <el-form-item label="DBOperateModels" prop="DBOperateModels">
+    <DBTable :tableData="spiderToEdit.DBOperateModels" :rowModel="dBOperateModel"></DBTable>
+  </el-form-item>
   <el-form-item label="Active" prop="Active">
     <el-switch v-model="spiderToEdit.Active"></el-switch>
   </el-form-item>
@@ -152,9 +161,11 @@
 
 <script>
 import EditableTable from './EditForm/EditableTable.vue'
+import DBTable from './EditForm/DBTable.vue'
 export default {
   components: {
-    EditableTable
+    EditableTable,
+    DBTable
   },
   data () {
     var validateName = (rule, value, callback) => {
@@ -226,6 +237,9 @@ export default {
         LocalStr: '',
         FtpStr: '',
         DBStr: '',
+        DictRelationLocals: [],
+        DictRelationFTPs: [],
+        DBOperateModels: [],
         Active: true,
         Time: ''
       },
@@ -257,6 +271,34 @@ export default {
         ParameterChange: '',
         UrlName: '',
         UrlValue: ''
+      },
+      dictRelationLocal: {
+        ListIndex: 0,
+        DictKeyName: '',
+        MovePath: '',
+        NewName: ''
+      },
+      dictRelationFTP: {
+        ListIndex: 0,
+        DictKeyName: '',
+        FtpIP: '',
+        FtpUserID: '',
+        FtpPassword: '',
+        FtpPath: '',
+        NewName: ''
+      },
+      dBOperateModel: {
+        DatabaseType: '',
+        ConnString: '',
+        TableName: '',
+        DictRelationDBList: []
+      },
+      dictRelationDB: {
+        FieldName: '',
+        FieldRemark: '',
+        ListIndex: '',
+        DictKeyName: '',
+        NewName: ''
       },
       spiderValidRule: {
         EntryName: [

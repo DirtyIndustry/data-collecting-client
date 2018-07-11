@@ -1,4 +1,1 @@
-{
-    "server": "localhost:7181",
-    "update": true
-}
+{"server":"localhost:7181","update":true}
