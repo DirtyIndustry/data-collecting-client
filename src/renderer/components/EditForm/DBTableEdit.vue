@@ -8,6 +8,7 @@
       <el-input v-model="editObject.ConnString"></el-input>
     </el-form-item>
     <el-form-item label="TableName" prop="TableName">
+      <el-button @click="getTables">Get Tables</el-button>
       <el-input v-model="editObject.TableName"></el-input>
     </el-form-item>
     <el-form-item label="DictRelationDBList" prop="DictRelationDBList">
@@ -51,6 +52,10 @@ export default {
   methods: {
     handleClose () {
       this.$emit('editclosing')
+    },
+    getTables () {
+      let messageOut = {Head: 'GetDBTables', Body: [this.editObject.DatabaseType, this.editObject.ConnString]}
+      this.$store.state.SpiderList.socket.send(JSON.stringify(messageOut))
     }
   }
 }
